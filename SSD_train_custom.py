@@ -17,12 +17,14 @@ from ssd import SSD300
 from ssd_training import MultiboxLoss
 from ssd_utils import BBoxUtility
 
+import time
+
 plt.rcParams['figure.figsize'] = (8, 8)
 plt.rcParams['image.interpolation'] = 'nearest'
 
 np.set_printoptions(suppress=True)
 
-NUM_CLASSES = 4
+NUM_CLASSES = 3
 input_shape = (300, 300, 3)
 
 priors = pickle.load(open('prior_boxes_ssd300.pkl', 'rb'))
@@ -246,15 +248,40 @@ callbacks = [keras.callbacks.ModelCheckpoint('./checkpoints/weights.{epoch:02d}-
 base_lr = 3e-4
 optim = keras.optimizers.Adam(lr=base_lr)
 model.compile(optimizer=optim,
-              loss=MultiboxLoss(NUM_CLASSES, neg_pos_ratio=2.0).compute_loss)
+              loss=MultiboxLoss(NUM_CLASSES, neg_pos_ratio=2.0).compute_loss,
+              metrics=['accuracy'])
+
 
 nb_epoch = 100
+
+start = time.time()
+
 history = model.fit_generator(gen.generate(True), gen.train_batches,
                               nb_epoch, verbose=1,
                               callbacks=callbacks,
                               validation_data=gen.generate(False),
                               nb_val_samples=gen.val_batches,
                               nb_worker=1)
+
+elapsed_time = time.time() - start
+print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
+
+# plot performance
+plt.plot(history.history['acc'])
+plt.plot(history.history['val_acc'])
+plt.title('model accuracy')
+plt.xlabel('epoch')
+plt.ylabel('accuracy')
+plt.legend(['acc', 'val_acc'], loc='lower right')
+plt.show()
+
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['loss', 'val_loss'], loc='upper left')
+plt.show()
 
 if __name__ == '__main__':
     inputs = []

@@ -6,7 +6,7 @@ class XML_preprocessor(object):
 
     def __init__(self, data_path):
         self.path_prefix = data_path
-        self.num_classes = 3
+        self.num_classes = 2
         self.data = dict()
         self._preprocess_XML()
 
@@ -39,12 +39,12 @@ class XML_preprocessor(object):
 
     def _to_one_hot(self,name):
         one_hot_vector = [0] * self.num_classes
-        if name == 'lonestar':
+        if name == 'face':
             one_hot_vector[0] = 1
-        elif name == 'cat':
+        elif name == 'hand':
             one_hot_vector[1] = 1
-        elif name == 'camera':
-            one_hot_vector[2] = 1
+        # elif name == 'camera':
+            # one_hot_vector[2] = 1
         # elif name == 'boat':
         #     one_hot_vector[3] = 1
         # elif name == 'bottle':
