@@ -10,6 +10,15 @@ import tensorflow as tf
 
 from ssd import SSD300
 from ssd_utils import BBoxUtility
+from progressbar import ProgressBar
+
+import datetime
+
+# 書き出し設定
+voc_classes = ['face'] #ラベル一覧
+weight_file_name = "./checkpoints/weights.19-0.87.hdf5"
+video_file_name = './free_data/lonestartx_free.mp4'
+# -----------------------
 
 def mosaic(src, ratio=0.1):
     small = cv2.resize(src, None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
@@ -26,17 +35,15 @@ config = tf.ConfigProto()
 config.gpu_options.per_process_gpu_memory_fraction = 0.45
 set_session(tf.Session(config=config))
 
-
-voc_classes = ['face']
 NUM_CLASSES = len(voc_classes) + 1
 
 input_shape=(300, 300, 3)
 model = SSD300(input_shape, num_classes=NUM_CLASSES)
 # model.load_weights('weights_SSD300.hdf5', by_name=True)
-model.load_weights('./checkpoints/weights.19-0.87.hdf5', by_name=True)
+model.load_weights(weight_file_name, by_name=True)
 bbox_util = BBoxUtility(NUM_CLASSES)
 
-vid = cv2.VideoCapture('./free_data/lonestartx_free.mp4')
+vid = cv2.VideoCapture(video_file_name)
 if not vid.isOpened():
     raise IOError(("Couldn't open video file or webcam. If you're "
     "trying to open a webcam, make sure you video_path is an integer!"))
@@ -46,7 +53,12 @@ vidh = vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
 fps = vid.get(cv2.CAP_PROP_FPS)
 
 fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
-out = cv2.VideoWriter('./free_data/output5.avi', int(fourcc), fps, (int(vidw), int(vidh)))
+now = datetime.datetime.now()
+out = cv2.VideoWriter('./free_data/output' + now.strftime("%Y-%m-%d-%H-%M-%S") + '.avi', int(fourcc), fps, (int(vidw), int(vidh)))
+
+min = 0
+max = int(vid.get(7))
+p = ProgressBar(min, max)
 
 while True:
 # for i in range(10):  # for test
@@ -54,7 +66,7 @@ while True:
     if not retval:
         print("Done!")
         break
-
+    p.update(int(vid.get(1)))  
     inputs = []
     images = []
     images.append(img)
@@ -66,9 +78,6 @@ while True:
 
     preds = model.predict(inputs, batch_size=1, verbose=1)
     results = bbox_util.detection_out(preds)
-
-    print(len(images))
-
     for i, img in enumerate(images):
         # Parse the outputs.
         det_label = results[i][:, 0]
