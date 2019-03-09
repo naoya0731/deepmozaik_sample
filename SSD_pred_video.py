@@ -27,13 +27,13 @@ config.gpu_options.per_process_gpu_memory_fraction = 0.45
 set_session(tf.Session(config=config))
 
 
-voc_classes = ['face', 'hand']
+voc_classes = ['face']
 NUM_CLASSES = len(voc_classes) + 1
 
 input_shape=(300, 300, 3)
 model = SSD300(input_shape, num_classes=NUM_CLASSES)
 # model.load_weights('weights_SSD300.hdf5', by_name=True)
-model.load_weights('./checkpoints/weights.99-2.78.hdf5', by_name=True)
+model.load_weights('./checkpoints/weights.19-0.87.hdf5', by_name=True)
 bbox_util = BBoxUtility(NUM_CLASSES)
 
 vid = cv2.VideoCapture('./free_data/lonestartx_free.mp4')
@@ -46,7 +46,7 @@ vidh = vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
 fps = vid.get(cv2.CAP_PROP_FPS)
 
 fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
-out = cv2.VideoWriter('./free_data/output.avi', int(fourcc), fps, (int(vidw), int(vidh)))
+out = cv2.VideoWriter('./free_data/output5.avi', int(fourcc), fps, (int(vidw), int(vidh)))
 
 while True:
 # for i in range(10):  # for test
@@ -66,6 +66,8 @@ while True:
 
     preds = model.predict(inputs, batch_size=1, verbose=1)
     results = bbox_util.detection_out(preds)
+
+    print(len(images))
 
     for i, img in enumerate(images):
         # Parse the outputs.

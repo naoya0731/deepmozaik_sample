@@ -1,0 +1,26 @@
+<annotation verified="yes">
+                                    <folder>Annotation</folder>
+                                    <filename>erodouga_20sec 2_frame_52</filename>
+                                    <path>/Users/nf/Downloads/erodouga_20sec 2_output/JPEGImages/erodouga_20sec 2_frame_52.jpg</path>
+                                    <source>
+                                        <database>Unknown</database>
+                                    </source>
+                                    <size>
+                                        <width>1280</width>
+                                        <height>720</height>
+                                        <depth>3</depth>
+                                    </size>
+                                    <segmented>0</segmented>
+                                    <object>
+                                            <name>vagina</name>
+                                            <pose>Unspecified</pose>
+                                            <truncated>0</truncated>
+                                            <difficult>0</difficult>
+                                            <bndbox>
+                                                <xmin>496.14345114345116</xmin>
+                                                <ymin>367.5571725571726</ymin>
+                                                <xmax>697.9158004158005</xmax>
+                                                <ymax>530.0155925155925</ymax>
+                                            </bndbox>
+                                    </object>
+                                    </annotation>

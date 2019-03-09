@@ -1,0 +1,26 @@
+<annotation verified="yes">
+                                    <folder>Annotation</folder>
+                                    <filename>erodouga_20sec 2_frame_70</filename>
+                                    <path>/Users/nf/Downloads/erodouga_20sec 2_output/JPEGImages/erodouga_20sec 2_frame_70.jpg</path>
+                                    <source>
+                                        <database>Unknown</database>
+                                    </source>
+                                    <size>
+                                        <width>1280</width>
+                                        <height>720</height>
+                                        <depth>3</depth>
+                                    </size>
+                                    <segmented>0</segmented>
+                                    <object>
+                                            <name>pennis</name>
+                                            <pose>Unspecified</pose>
+                                            <truncated>0</truncated>
+                                            <difficult>0</difficult>
+                                            <bndbox>
+                                                <xmin>481.08627858627864</xmin>
+                                                <ymin>362.15176715176716</ymin>
+                                                <xmax>725.2442827442828</xmax>
+                                                <ymax>541.4293139293139</ymax>
+                                            </bndbox>
+                                    </object>
+                                    </annotation>

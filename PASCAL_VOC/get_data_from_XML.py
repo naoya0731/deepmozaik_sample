@@ -39,9 +39,9 @@ class XML_preprocessor(object):
 
     def _to_one_hot(self,name):
         one_hot_vector = [0] * self.num_classes
-        if name == 'face':
+        if name == 'vagina':
             one_hot_vector[0] = 1
-        elif name == 'hand':
+        elif name == 'pennis':
             one_hot_vector[1] = 1
         # elif name == 'camera':
             # one_hot_vector[2] = 1

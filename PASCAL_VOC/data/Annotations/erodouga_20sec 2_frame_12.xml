@@ -1,0 +1,39 @@
+<annotation verified="yes">
+                                    <folder>Annotation</folder>
+                                    <filename>erodouga_20sec 2_frame_12</filename>
+                                    <path>/Users/nf/Downloads/erodouga_20sec 2_output/JPEGImages/erodouga_20sec 2_frame_12.jpg</path>
+                                    <source>
+                                        <database>Unknown</database>
+                                    </source>
+                                    <size>
+                                        <width>1280</width>
+                                        <height>720</height>
+                                        <depth>3</depth>
+                                    </size>
+                                    <segmented>0</segmented>
+                                    <object>
+                                            <name>vagina</name>
+                                            <pose>Unspecified</pose>
+                                            <truncated>0</truncated>
+                                            <difficult>0</difficult>
+                                            <bndbox>
+                                                <xmin>587.7130977130978</xmin>
+                                                <ymin>415.24428274428277</ymin>
+                                                <xmax>673.2016632016633</xmax>
+                                                <ymax>501.8711018711019</ymax>
+                                            </bndbox>
+                                    </object>
+                                    
+                                    <object>
+                                            <name>pennis</name>
+                                            <pose>Unspecified</pose>
+                                            <truncated>0</truncated>
+                                            <difficult>0</difficult>
+                                            <bndbox>
+                                                <xmin>609.7349272349272</xmin>
+                                                <ymin>506.53846153846155</ymin>
+                                                <xmax>728.4459459459459</xmax>
+                                                <ymax>545.3326403326404</ymax>
+                                            </bndbox>
+                                    </object>
+                                    </annotation>
